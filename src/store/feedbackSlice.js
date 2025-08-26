@@ -4,8 +4,8 @@ const initialState = {
   confirmPopUpOpened: false,
 };
 
-const reportSlice = createSlice({
-  name: "reportSlice",
+const feedbackSlice = createSlice({
+  name: "feedbackSlice",
   initialState,
   reducers: {
     openConfirmPopUp: (state, action) => {
@@ -14,5 +14,5 @@ const reportSlice = createSlice({
   },
 });
 
-export default reportSlice.reducer;
-export const { openConfirmPopUp } = reportSlice.actions;
+export default feedbackSlice.reducer;
+export const { openConfirmPopUp } = feedbackSlice.actions;

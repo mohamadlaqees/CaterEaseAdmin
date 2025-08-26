@@ -108,10 +108,10 @@ const LeftSideBar = ({ sidebarRef }) => {
                   : "text-(--primaryFont)"
               } `
             }
-            to={"./reviews"}
+            to={"./feedback"}
           >
             <Inbox />
-            Reviews
+            Feedback
           </NavLink>
         </li>
       </ul>

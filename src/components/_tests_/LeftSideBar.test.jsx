@@ -30,7 +30,7 @@ describe("LeftSideBar", () => {
       screen.getByRole("link", { name: /restaurants/i })
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /owners/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /reviews/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /feedback/i })).toBeInTheDocument();
   });
 
   it("applies an active class to the current route", () => {

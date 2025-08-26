@@ -10,13 +10,12 @@ import ProtectRoute from "./components/protectRoute.jsx";
 import Owners from "./pages/Owners.jsx";
 import AddOwner from "./pages/AddOwner.jsx";
 import EditOwner from "./pages/EditOwner.jsx";
-// import Reviews from "./pages/Reviews.jsx";
 import EditRestaurant from "./pages/EditRestaurant.jsx";
 import RestaurantDetails from "./pages/RestaurantDetails.jsx";
 import AddRestaurant from "./pages/AddRestaurant.jsx";
 import Restaurants from "./pages/Restaurants.jsx";
 import OwnerDetails from "./pages/OwnerDetails.jsx";
-import Reviews from "./pages/Reviews.jsx";
+import FeedbackPage from "./pages/Feedback.jsx";
 
 const routes = createBrowserRouter([
   {
@@ -84,8 +83,8 @@ const routes = createBrowserRouter([
         ],
       },
       {
-        path: "reviews",
-        element: <Reviews />,
+        path: "feedback",
+        element: <FeedbackPage />,
       },
     ],
   },

@@ -146,7 +146,7 @@ const Owners = () => {
             <NavLink
               to={"add-owner"}
               className={({ isActive }) =>
-                `transition-all ${
+                `transition-all  hover:text-(--primary) ${
                   isActive ? "text-(--primary)" : "text-(--primaryFont)"
                 }`
               }

@@ -11,7 +11,7 @@ const Notifications = ({ notifications, notificationsRef }) => {
     >
       <header className="border-b-2 border-(--border-color) w-full flex justify-between px-4 py-3">
         Notifications
-        <button className="text-sm cursor-pointer outline-0 text-(--secondaryFont)">
+        <button className="text-sm cursor-pointer outline-0 text-(--secondaryFont) hover:text-(--primary)">
           Clear All
         </button>
       </header>

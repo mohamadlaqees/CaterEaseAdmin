@@ -1,14 +1,11 @@
-// src/pages/__tests__/Reviews.test.jsx
-
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { MemoryRouter } from "react-router";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
-import Reviews from "../Reviews";
 import { apiSlice } from "../../store/apiSlice/apiSlice";
-import reportSlice from "../../store/reportSlice";
+import feedbackSlice from "../../store/feedbackSlice";
 
 // Mock data
 const mockComplaints = [
@@ -37,7 +34,7 @@ vi.mock("../../store/apiSlice/apiSlice", async (importOriginal) => {
   return {
     ...original,
     useComplaintsQuery: vi.fn(),
-    useChangeReviewsStatusMutation: () => [
+    useChangeFeedbackStatusMutation: () => [
       mockChangeStatusMutation,
       { isLoading: false },
     ],
@@ -46,11 +43,12 @@ vi.mock("../../store/apiSlice/apiSlice", async (importOriginal) => {
 });
 
 import { useComplaintsQuery } from "../../store/apiSlice/apiSlice";
+import FeedbackPage from "../Feedback";
 
 const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
-    report: reportSlice.reducer,
+    report: feedbackSlice.reducer,
   },
   middleware: (gDM) => gDM().concat(apiSlice.middleware),
 });
@@ -59,13 +57,13 @@ const renderComponent = () => {
   render(
     <Provider store={store}>
       <MemoryRouter>
-        <Reviews />
+        <FeedbackPage />
       </MemoryRouter>
     </Provider>
   );
 };
 
-describe("Reviews Page", () => {
+describe("Feedback Page", () => {
   beforeEach(() => {
     vi.resetAllMocks();
     useComplaintsQuery.mockReturnValue({
@@ -75,7 +73,7 @@ describe("Reviews Page", () => {
     });
   });
 
-  it("renders a list of reviews with user information", () => {
+  it("renders a list of feedbacks  with user information", () => {
     renderComponent();
     expect(
       screen.getByRole("heading", { name: /happy customer/i })

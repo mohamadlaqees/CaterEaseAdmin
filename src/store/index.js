@@ -3,7 +3,7 @@ import sidebarSlice from "./sidebarSlice";
 import dashboardSlice from "./dashboardSlice";
 import ownerSlice from "./ownerSlice";
 import restaurantSlice from "./restaurantSlice";
-import reportSlice from "./reportSlice";
+import feedbackSlice from "./feedbackSlice";
 import { apiSlice } from "./apiSlice/apiSlice";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
@@ -13,7 +13,7 @@ const store = configureStore({
     dash: dashboardSlice,
     owner: ownerSlice,
     restaurant: restaurantSlice,
-    report: reportSlice,
+    feedback: feedbackSlice,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
