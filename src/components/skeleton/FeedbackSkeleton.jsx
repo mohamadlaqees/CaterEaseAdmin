@@ -1,52 +1,54 @@
+// src/components/skeleton/FeedbackSkeleton.js
+
 import { Skeleton } from "@/components/ui/skeleton";
 
-const FeedbackSkeleton = () => {
+/**
+ * A skeleton loader for a single feedback list item.
+ * It mimics the layout of the FeedbackListItem component.
+ * @param {{ type: 'complaint' | 'report' }} props
+ */
+const ListItemsSkeleton = ({ type }) => {
+  const isComplaint = type === "complaints";
+
   return (
-    <main className="p-5 sm:p-10 animate-pulse">
-      {/* Individual Review Cards Skeleton */}
-      <section className="mt-6 text-sm sm:text-base">
-        {[...Array(3)].map((_, i) => (
-          <div
-            key={i}
-            className="mt-4 py-10 w-full flex flex-col lg:flex-row gap-5 lg:gap-10 border-b-2 border-gray-200"
-          >
-            {/* Avatar Skeleton */}
-            <div className="flex-shrink-0">
-              <Skeleton className="rounded-full w-20 h-20" />
-            </div>
+    <div className="p-6 mb-4 border rounded-lg shadow-sm bg-white">
+      {/* Top Row: Title and Status Badge */}
+      <div className="flex justify-between items-center">
+        <Skeleton className="h-7 w-3/5" /> {/* Mimics item.title */}
+        <Skeleton className="h-6 w-24 rounded-full" />{" "}
+        {/* Mimics status badge */}
+      </div>
 
-            {/* Content Skeleton */}
-            <div className="w-full space-y-4">
-              {/* User Name and Status Badge */}
-              <div className="flex items-center gap-3">
-                <Skeleton className="h-7 w-40" />
-                <Skeleton className="h-5 w-20 rounded-full" />
-              </div>
-
-              {/* Rating, Date, and Status Dropdown */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="flex gap-1">
-                    {[...Array(5)].map((_, j) => (
-                      <Skeleton key={j} className="h-6 w-6 rounded-full" />
-                    ))}
-                  </div>
-                  <Skeleton className="h-5 w-24" />
-                </div>
-                <Skeleton className="h-10 w-full sm:w-[180px]" />
-              </div>
-
-              {/* Message Skeleton */}
-              <div className="space-y-2 pt-2">
-                <Skeleton className="h-4 w-full" />
-                <Skeleton className="h-4 w-5/6" />
-                <Skeleton className="h-4 w-3/4" />
-              </div>
-            </div>
+      {/* Bottom Row: Date and optional Stars */}
+      <div className="flex items-center justify-between mt-3">
+        <Skeleton className="h-5 w-1/4" /> {/* Mimics item.date */}
+        {/* Conditionally render the star rating skeleton */}
+        {isComplaint && (
+          <div className="flex items-center gap-1">
+            <Skeleton className="h-5 w-5" />
+            <Skeleton className="h-5 w-5" />
+            <Skeleton className="h-5 w-5" />
+            <Skeleton className="h-5 w-5" />
+            <Skeleton className="h-5 w-5" />
           </div>
-        ))}
-      </section>
-    </main>
+        )}
+      </div>
+    </div>
+  );
+};
+
+/**
+ * The main skeleton component that renders a list of placeholder items.
+ * @param {{ type: 'complaints' | 'reports' }} props
+ */
+const FeedbackSkeleton = ({ type = "complaints" }) => {
+  return (
+    <div className="animate-pulse">
+      {/* Render 3 placeholder items of the specified type */}
+      {[...Array(3)].map((_, i) => (
+        <ListItemsSkeleton key={i} type={type} />
+      ))}
+    </div>
   );
 };
 

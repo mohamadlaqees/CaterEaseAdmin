@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router";
 import { toast, Toaster } from "sonner";
-import { User, Mail, Phone, KeyRound } from "lucide-react";
+import { User, Mail, Phone, KeyRound, ShieldCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -17,20 +17,28 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import LoadingButton from "../components/LoadingButton";
 import { useAddOwnerMutation } from "../store/apiSlice/apiSlice";
-import { addOwnerSchema } from "../validation/ownerValidation"; // Import the new ADD schema
+import { ownerSchema } from "../validation/ownerValidation"; // Import the new ADD schema
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const AddOwner = () => {
   const navigate = useNavigate();
   const [addOwner, { isLoading }] = useAddOwnerMutation();
 
   const form = useForm({
-    resolver: zodResolver(addOwnerSchema),
+    resolver: zodResolver(ownerSchema),
     defaultValues: {
       name: "",
       email: "",
       phone: "",
       gender: undefined,
       password: "",
+      status: "active",
     },
     mode: "onChange",
   });
@@ -46,7 +54,7 @@ const AddOwner = () => {
       toast.success(response.message || "Owner created successfully!", {
         style: {
           background: "white",
-          color: "#A1CA46",
+          color: "#314E76",
           border: "1px solid hsl(var(--border))",
         },
       });
@@ -193,6 +201,35 @@ const AddOwner = () => {
                       </FormItem>
                     )}
                   />
+                  <FormField
+                    control={form.control}
+                    name="status"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Status</FormLabel>
+                        <div className="relative">
+                          <ShieldCheck className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-(--primaryFont)" />
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger className="pl-10 focus-visible:ring-(--primary) focus:border-0 placeholder-(--secondaryFont) text-(--secondaryFont)">
+                                <SelectValue placeholder="Select a status" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent className="text-(--secondaryFont)">
+                              <SelectItem value="active">Active</SelectItem>
+                              <SelectItem value="deleted">
+                                Not Active
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
                   {/* Password */}
                   <div className="sm:col-span-2">
@@ -225,11 +262,11 @@ const AddOwner = () => {
               <div className="flex items-center justify-end gap-4 p-6 bg-gray-50/50 border-t border-gray-200 rounded-b-xl">
                 <Button
                   type="button"
-                  variant="ghost"
+                  variant="outline"
                   onClick={() => {
                     form.reset();
                   }}
-                  className="text-(--secondaryFont) cursor-pointer hover:bg-gray-100"
+                  className="text-(--secondaryFont) hover:text-(--primary) cursor-pointer "
                 >
                   Clear Form
                 </Button>

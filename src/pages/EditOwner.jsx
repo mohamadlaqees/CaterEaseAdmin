@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams, useNavigate } from "react-router";
 import { toast, Toaster } from "sonner";
-import { User, Mail, Phone, KeyRound } from "lucide-react";
+import { User, Mail, Phone, KeyRound, ShieldCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -24,6 +24,13 @@ import {
   useOwnerDetailsQuery,
 } from "../store/apiSlice/apiSlice";
 import { editOwnerSchema } from "../validation/ownerValidation"; // Import the new schema
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const EditOwner = () => {
   const { ownerID } = useParams();
@@ -39,6 +46,7 @@ const EditOwner = () => {
       name: "",
       email: "",
       phone: "",
+      status: "active",
       gender: undefined,
       password: "",
     },
@@ -54,6 +62,7 @@ const EditOwner = () => {
         phone: String(response.phone),
         gender: response.gender, // 'm' or 'f'
         password: "", // Keep password field empty by default for security
+        status: response.status,
       });
     }
   }, [ownerResponse, form]);
@@ -65,6 +74,7 @@ const EditOwner = () => {
       email: data.email,
       phone: data.phone,
       gender: data.gender,
+      status: data.status,
     };
 
     if (data.password) {
@@ -76,7 +86,7 @@ const EditOwner = () => {
       toast.success(response.message || "Owner updated successfully!", {
         style: {
           background: "white",
-          color: "#A1CA46",
+          color: "#314E76",
           border: "1px solid hsl(var(--border))",
         },
       });
@@ -213,6 +223,34 @@ const EditOwner = () => {
                     </FormItem>
                   )}
                 />
+                <FormField
+                  control={form.control}
+                  name="status"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Status</FormLabel>
+                      <div className="relative">
+                        <ShieldCheck className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-(--primaryFont)" />
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          key={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger className="pl-10 focus-visible:ring-(--primary) focus:border-0 placeholder-(--secondaryFont) text-(--secondaryFont)">
+                              <SelectValue placeholder="Select a status" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="text-(--secondaryFont)">
+                            <SelectItem value="active">Active</SelectItem>
+                            <SelectItem value="deleted">Not Active</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
                 {/* New Password */}
                 <div className="sm:col-span-2">
@@ -245,11 +283,11 @@ const EditOwner = () => {
             <div className="flex items-center justify-end gap-4 p-6 bg-gray-50/50 border-t border-gray-200 rounded-b-xl">
               <Button
                 type="button"
-                variant="ghost"
+                variant="outline"
                 onClick={() => {
                   navigate("/owners");
                 }}
-                className="text-(--secondaryFont) cursor-pointer hover:bg-gray-100"
+                className="text-(--secondaryFont) hover:text-(--primary) cursor-pointer "
               >
                 Cancel
               </Button>

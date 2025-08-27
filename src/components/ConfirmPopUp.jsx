@@ -19,7 +19,7 @@ const ConfirmPopUp = ({
       {/* Modal Content */}
       <div
         className={`fixed bg-white text-sm sm:text-base text-(--primaryFont) p-8 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md z-50
-                   w-[90%] max-w-md sm:w-[50%]`} // Adjusted width for better responsiveness
+                   w-[90%] sm:w-[100%] max-w-md `} // Adjusted width for better responsiveness
       >
         <div className="flex justify-end">
           <X
@@ -39,16 +39,17 @@ const ConfirmPopUp = ({
         <div className="flex justify-center gap-4 mt-8">
           <Button
             type="button"
-            variant="secondary"
-            className="w-full sm:w-auto text-(--primary) h-10 text-sm cursor-pointer transition-all"
+            variant="outline"
+            className="text-(--secondaryFont) hover:text-(--primary) cursor-pointer "
             onClick={onCancel}
           >
             Cancel
           </Button>
           <div onClick={onConfirm}>
             <LoadingButton
+              variant={"destructive"}
               btnClass={
-                "w-full sm:w-auto h-10 text-sm cursor-pointer bg-[#e75858] hover:bg-[#e75858] hover:brightness-105 transition-all text-white"
+                "w-full sm:w-auto h-10 text-sm cursor-pointer  hover:brightness-105 transition-all text-white"
               }
               disabled={loading}
               isButton={true}

@@ -111,7 +111,7 @@ const EditRestaurant = () => {
       toast.success("Restaurant updated successfully!", {
         style: {
           background: "white",
-          color: "#A1CA46",
+          color: "#314E76",
           border: "1px solid hsl(var(--border))",
         },
       });
@@ -297,11 +297,11 @@ const EditRestaurant = () => {
                 <div className="flex justify-end gap-4 pt-6 border-t-2 border-(--border-color)">
                   <Button
                     type="button"
-                    variant="ghost"
+                    variant="outline"
                     onClick={() => {
                       navigate("/restaurants");
                     }}
-                    className="text-(--secondaryFont) cursor-pointer hover:bg-gray-100"
+                    className="text-(--secondaryFont) hover:text-(--primary) cursor-pointer "
                   >
                     Cancel
                   </Button>

@@ -170,7 +170,7 @@ export const apiSlice = createApi({
     }),
     deleteReview: build.mutation({
       query: (reviewID) => ({
-        url: `update-staus-compalant/${reviewID}`,
+        url: `complaints/${reviewID}`,
         method: "DELETE",
       }),
     }),
