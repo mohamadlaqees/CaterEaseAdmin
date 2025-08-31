@@ -47,7 +47,7 @@ const EditOwner = () => {
       email: "",
       phone: "",
       status: "active",
-      gender: undefined,
+      gender: "",
       password: "",
     },
     mode: "onChange",

@@ -40,6 +40,7 @@ const ConfirmPopUp = ({
           <Button
             type="button"
             variant="outline"
+            size="lg"
             className="text-(--secondaryFont) hover:text-(--primary) cursor-pointer "
             onClick={onCancel}
           >

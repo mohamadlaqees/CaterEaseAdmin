@@ -104,7 +104,7 @@ function AdminDashboard() {
   }
 
   const {
-    activeRestaurants,
+    activeRestaurants ,
     averageSatisfaction,
     total_orders,
     total_revenue,

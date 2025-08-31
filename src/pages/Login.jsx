@@ -16,6 +16,8 @@ import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import LoadingButton from "../components/LoadingButton";
 import { Navigate } from "react-router";
+import { getFCMToken } from "../util/firebaseUtils";
+import { meta } from "@eslint/js";
 
 const Login = () => {
   const token = localStorage.getItem("authToken");
@@ -33,7 +35,10 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await logIn(data).unwrap();
+      const fcmToken = await getFCMToken();
+      const response = await logIn(data, {
+        meta: { fcmToken: fcmToken },
+      }).unwrap();
       console.log(...response);
       if (!response?.data?.message) {
         navigate("/");

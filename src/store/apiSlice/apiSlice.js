@@ -1,19 +1,44 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const apiSlice = createApi({
-  reducerPath: "api",
+const baseQuery = fetchBaseQuery({
+  baseUrl: "http://127.0.0.1:8000/api/",
+  prepareHeaders: (header) => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      header.set("Authorization", `Bearer ${token}`);
+    }
+    header.set("Accept", "application/json");
+    return header;
+  },
+});
 
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://127.0.0.1:8000/api/",
-    prepareHeaders: (header) => {
+const baseQueryWithDynamicHeaders = async (args, api, extraOptions) => {
+  const fcmToken = api.meta?.fcmToken;
+
+  if (fcmToken) {
+    const customPrepareHeaders = (headers) => {
       const token = localStorage.getItem("authToken");
       if (token) {
-        header.set("Authorization", `Bearer ${token}`);
+        headers.set("Authorization", `Bearer ${token}`);
       }
-      header.set("Accept", "application/json");
-      return header;
-    },
-  }),
+      headers.set("Accept", "application/json");
+      headers.set("X-FCM-Token", fcmToken);
+      return headers;
+    };
+
+    return fetchBaseQuery({
+      baseUrl: "http://127.0.0.1:8000/api/",
+      prepareHeaders: customPrepareHeaders,
+    })(args, api, extraOptions);
+  }
+
+  return baseQuery(args, api, extraOptions);
+};
+
+export const apiSlice = createApi({
+  reducerPath: "api",
+  baseQuery: baseQueryWithDynamicHeaders,
+
   tagTypes: ["Restaurants", "packages", "discount", "owners", "owner"],
   endpoints: (build) => ({
     // Auth

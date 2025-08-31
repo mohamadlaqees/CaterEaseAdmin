@@ -105,9 +105,9 @@ const AddRestaurant = () => {
             encType="multipart/form-data"
           >
             <header className="flex items-center justify-between font-bold mb-5">
-              <span className="text-sm text-center sm:text-2xl text-(--primaryFont)">
+              <h1 className="text-sm text-center sm:text-2xl text-(--primaryFont)">
                 Add Restaurant
-              </span>
+              </h1>
               <div className="flex items-center text-(--primaryFont) text-sm text-center sm:text-base sm:gap-2 font-medium">
                 <NavLink
                   to={"/restaurants"}

@@ -4,6 +4,7 @@ import dashboardSlice from "./dashboardSlice";
 import ownerSlice from "./ownerSlice";
 import restaurantSlice from "./restaurantSlice";
 import feedbackSlice from "./feedbackSlice";
+import notificationsSlice from "./notificationsSlice";
 import { apiSlice } from "./apiSlice/apiSlice";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
@@ -14,6 +15,8 @@ const store = configureStore({
     owner: ownerSlice,
     restaurant: restaurantSlice,
     feedback: feedbackSlice,
+    notification: notificationsSlice,
+
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>

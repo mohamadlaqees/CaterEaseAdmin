@@ -14,6 +14,7 @@ const HeaderBar = ({ sidebarRef }) => {
   const { sidebarOpened } = useSelector((state) => state.sidebar);
   const [dropMenu, setDropMenu] = useState(false);
   const [notifications, setNotifications] = useState(false);
+  const { unreadCount } = useSelector((state) => state.notification);
   const menu = useRef();
   const notification = useRef();
   const notificationBell = useRef();
@@ -90,13 +91,14 @@ const HeaderBar = ({ sidebarRef }) => {
                 className="relative text-(--primaryFont) cursor-pointer "
                 size={30}
               />
-
-              <span className="absolute w-4 cursor-pointer text-xs text-center h-4 text-white  rounded-full bg-(--primary) top-0 right-0">
-                2
-              </span>
+              {unreadCount !== 0 && (
+                <span className="absolute w-4 cursor-pointer text-xs text-center h-4 text-white  rounded-full bg-(--primary) top-0 right-0">
+                  {unreadCount}
+                </span>
+              )}
             </div>
             <Notifications
-              notifications={notifications}
+              isOpen={notifications}
               notificationsRef={notification}
             />
           </div>

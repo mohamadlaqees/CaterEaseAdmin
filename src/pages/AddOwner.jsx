@@ -36,7 +36,7 @@ const AddOwner = () => {
       name: "",
       email: "",
       phone: "",
-      gender: undefined,
+      gender: null,
       password: "",
       status: "active",
     },
