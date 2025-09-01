@@ -29,6 +29,7 @@ import EmptySection from "../components/EmptySection";
 // Import Hooks, Components & Utilities
 import {
   useChangeFeedbackStatusMutation,
+  useChangeReportStatusMutation,
   useComplaintsQuery,
   useDeleteReviewMutation,
   useReportsQuery,
@@ -85,7 +86,13 @@ const FeedbackPage = () => {
     refetch: refetchReports,
   } = useReportsQuery();
   const [changeStatus, { isLoading: changeStatusIsLoading }] =
-    useChangeFeedbackStatusMutation();
+    useChangeFeedbackStatusMutation(undefined, {
+      skip: activeTab === "reports",
+    });
+  const [changeReportStatus, { isLoading: changeReportStatusIsLoading }] =
+    useChangeReportStatusMutation(undefined, {
+      skip: activeTab === "complaints",
+    });
   const [deleteItem, { isLoading: deleteIsLoading }] =
     useDeleteReviewMutation();
 
@@ -114,8 +121,13 @@ const FeedbackPage = () => {
 
   // --- EVENT HANDLERS ---
   const handleStatusChange = async (id, newStatus) => {
+    console.log(activeTab);
     try {
-      await changeStatus({ reviewID: id, status: newStatus }).unwrap();
+      if (activeTab === "complaints") {
+        await changeStatus({ reviewID: id, status: newStatus }).unwrap();
+      } else {
+        await changeReportStatus({ reviewID: id, status: newStatus }).unwrap();
+      }
       toast.success("Status updated successfully!", {
         style: {
           background: "white",
@@ -184,7 +196,11 @@ const FeedbackPage = () => {
           closeHandler={() => setSelectedFeedback(null)}
           onStatusChange={handleStatusChange}
           onDelete={handleDeleteClick}
-          statusChangeLoading={changeStatusIsLoading}
+          statusChangeLoading={
+            activeTab === "complaint"
+              ? changeStatusIsLoading
+              : changeReportStatusIsLoading
+          }
         />
       )}
 

@@ -193,6 +193,15 @@ export const apiSlice = createApi({
         },
       }),
     }),
+    changeReportStatus: build.mutation({
+      query: ({ reviewID, status }) => ({
+        url: `order/admin/${reviewID}/update-status`,
+        method: "PUT",
+        body: {
+          status,
+        },
+      }),
+    }),
     deleteReview: build.mutation({
       query: (reviewID) => ({
         url: `complaints/${reviewID}`,
@@ -226,4 +235,5 @@ export const {
   useReportsQuery,
   useChangeFeedbackStatusMutation,
   useDeleteReviewMutation,
+  useChangeReportStatusMutation,
 } = apiSlice;

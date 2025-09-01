@@ -16,6 +16,7 @@ import AddRestaurant from "./pages/AddRestaurant.jsx";
 import Restaurants from "./pages/Restaurants.jsx";
 import OwnerDetails from "./pages/OwnerDetails.jsx";
 import FeedbackPage from "./pages/Feedback.jsx";
+import NotFoundPage from "./pages/Not-found.jsx";
 
 const routes = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const routes = createBrowserRouter([
         <Layout />
       </ProtectRoute>
     ),
+
     children: [
       {
         index: true,
@@ -87,6 +89,10 @@ const routes = createBrowserRouter([
         element: <FeedbackPage />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 

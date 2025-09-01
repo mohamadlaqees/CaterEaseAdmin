@@ -209,7 +209,7 @@ const Owners = () => {
                         <SelectValue placeholder="Availability" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectGroup className="text-(--primaryFont)">
+                        <SelectGroup className="text-(--secondaryFont)">
                           <SelectItem value="all">All</SelectItem>
                           <SelectItem value="active">Active</SelectItem>
                           <SelectItem value="deleted">Not Active</SelectItem>

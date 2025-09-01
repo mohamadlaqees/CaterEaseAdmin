@@ -104,7 +104,7 @@ function AdminDashboard() {
   }
 
   const {
-    activeRestaurants ,
+    activeRestaurants,
     averageSatisfaction,
     total_orders,
     total_revenue,
@@ -243,7 +243,7 @@ function AdminDashboard() {
               <SelectTrigger className="w-full md:w-[220px]  text-(--primaryFont)">
                 <SelectValue placeholder="Select a Restaurant" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="text-(--secondaryFont)">
                 <SelectItem value="all">All Restaurants</SelectItem>
                 {allRestaurants?.map((restaurant) => (
                   <SelectItem
